@@ -3,22 +3,34 @@ import './App.css';
 import { useState } from 'react';
 
 function App() {
- const [language, setLanguage] = useState('react')
- const [years, setYears] = useState(0)
+//  const [language, setLanguage] = useState('react')
+//  const [years, setYears] = useState(0)
+
+const [state, setState] = useState({
+  language: "React",
+  years: 0
+})
+
+
 
  function changeLanguage(){
-   setLanguage('React Hooks')
+  setState({...state, language:"React Hooks"})
  }
 
  function addYear(){
-   setYears(prev => prev+1)
+   setState(prev => {
+     return {
+       ...prev,
+       years:prev.years +1
+     }
+   })
  }
 
   return (
     <div className="App">
-      <h2 onClick={changeLanguage}>Learning a new language called {language }</h2>
+      <h2 onClick={changeLanguage}>Learning a new language called {state.language }</h2>
 
-      <p>I have been learning it for {years} years now</p>
+      <p>I have been learning it for {state.years} years now</p>
       <button onClick={addYear}>Add Year</button>
     </div>
   );
