@@ -1,23 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+ const [language, setLanguage] = useState('react')
+ const [years, setYears] = useState(0)
+
+ function changeLanguage(){
+   setLanguage('React Hooks')
+ }
+
+ function addYear(){
+   setYears(prev => prev+1)
+ }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2 onClick={changeLanguage}>Learning a new language called {language }</h2>
+
+      <p>I have been learning it for {years} years now</p>
+      <button onClick={addYear}>Add Year</button>
     </div>
   );
 }
