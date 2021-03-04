@@ -1,37 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
-import { useState } from 'react';
+import logo from "./logo.svg";
+import "./App.css";
+import { useState, useEffect } from "react";
 
 function App() {
-//  const [language, setLanguage] = useState('react')
-//  const [years, setYears] = useState(0)
+  const [color, setColor] = useState("navy");
 
-const [state, setState] = useState({
-  language: "React",
-  years: 0
-})
+  useEffect(() => {
+    document.body.style.background = color;
+    document.body.style.color = "white";
 
+    window.addEventListener("keydown", handleEnterButton);
+    return () => {
+      window.removeEventListener("keydown", handleEnterButton);
+    };
+  }, [color]);
 
+  function changeColor() {
+    setColor("gold");
+  }
 
- function changeLanguage(){
-  setState({...state, language:"React Hooks"})
- }
-
- function addYear(){
-   setState(prev => {
-     return {
-       ...prev,
-       years:prev.years +1
-     }
-   })
- }
-
+  function handleEnterButton(event) {
+    if (event.keyCode === 13) {
+      setColor("red");
+    }
+  }
   return (
     <div className="App">
-      <h2 onClick={changeLanguage}>Learning a new language called {state.language }</h2>
+      <h2>Learning a new language called </h2>
 
-      <p>I have been learning it for {state.years} years now</p>
-      <button onClick={addYear}>Add Year</button>
+      <p>I have been learning it for years now</p>
+      <button onClick={changeColor}>change</button>
     </div>
   );
 }
