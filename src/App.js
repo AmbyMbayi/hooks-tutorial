@@ -1,35 +1,25 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { useState, useEffect } from "react";
+
+import {
+  decrement,
+  increment,
+  incrementByAmount,
+} from "./redux/features/counter/counterSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
-  const [color, setColor] = useState("navy");
+  const { count } = useSelector((state) => state.counter);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    document.body.style.background = color;
-    document.body.style.color = "white";
-
-    window.addEventListener("keydown", handleEnterButton);
-    return () => {
-      window.removeEventListener("keydown", handleEnterButton);
-    };
-  }, [color]);
-
-  function changeColor() {
-    setColor("gold");
-  }
-
-  function handleEnterButton(event) {
-    if (event.keyCode === 13) {
-      setColor("red");
-    }
-  }
   return (
     <div className="App">
-      <h2>Learning a new language called </h2>
-
-      <p>I have been learning it for years now</p>
-      <button onClick={changeColor}>change</button>
+      <h2>The Value of Count {count} </h2>
+      <button onClick={() => dispatch(increment())}>Increment</button>
+      <button onClick={() => dispatch(decrement())}>Decrement</button>
+      <button onClick={() => dispatch(incrementByAmount(10))}>
+        Increment by 33
+      </button>
     </div>
   );
 }
